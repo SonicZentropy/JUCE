@@ -308,5 +308,4 @@ private:
    #endif
 };
 
-
 #endif   // JUCE_HEAPBLOCK_H_INCLUDED

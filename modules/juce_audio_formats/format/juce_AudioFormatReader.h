@@ -99,14 +99,13 @@ public:
         @returns                    true if the operation succeeded, false if there was an error. Note
                                     that reading sections of data beyond the extent of the stream isn't an
                                     error - the reader should just return zeros for these regions
-        @see readMaxLevels
-    */
+        @see readMaxLevels  */
     bool read (int* const* destSamples,
                int numDestChannels,
                int64 startSampleInSource,
                int numSamplesToRead,
                bool fillLeftoverChannelsWithCopies);
-
+	
     /** Fills a section of an AudioSampleBuffer from this reader.
 
         This will convert the reader's fixed- or floating-point data to
@@ -121,7 +120,10 @@ public:
                bool useReaderLeftChan,
                bool useReaderRightChan);
 
-    /** Finds the highest and lowest sample levels from a section of the audio stream.
+
+	//void read(AudioBuffer<double>* buffer, int startSample, int numSamples, int64 readerStartSample, bool useReaderLeftChan, bool useReaderRightChan);
+
+	/** Finds the highest and lowest sample levels from a section of the audio stream.
 
         This will read a block of samples from the stream, and measure the
         highest and lowest sample levels from the channels in that section, returning

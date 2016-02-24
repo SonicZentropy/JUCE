@@ -146,6 +146,8 @@ public:
     /** Converts a stream of integers to floats, multiplying each one by the given multiplier. */
     static void JUCE_CALLTYPE convertFixedToFloat (float* dest, const int* src, float multiplier, int numValues) noexcept;
 
+	static void JUCE_CALLTYPE convertFixedToFloat(double* dest, const int* src, double multiplier, int numValues) noexcept;
+	
     /** Each element of dest will be the minimum of the corresponding element of the source array and the given comp value. */
     static void JUCE_CALLTYPE min (float* dest, const float* src, float comp, int num) noexcept;
 

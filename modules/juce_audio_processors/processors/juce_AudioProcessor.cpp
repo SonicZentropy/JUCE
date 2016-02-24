@@ -158,6 +158,7 @@ void AudioProcessor::setParameterNotifyingHost (const int parameterIndex,
 {
     setParameter (parameterIndex, newValue);
     sendParamChangeMessageToListeners (parameterIndex, newValue);
+	getParamChecked(parameterIndex)->setNeedsUIUpdate(false);
 }
 
 AudioProcessorListener* AudioProcessor::getListenerLocked (const int index) const noexcept
@@ -250,8 +251,11 @@ float AudioProcessor::getParameter (int index)
 
 void AudioProcessor::setParameter (int index, float newValue)
 {
-    if (AudioProcessorParameter* p = getParamChecked (index))
-        p->setValue (newValue);
+	if (AudioProcessorParameter* p = getParamChecked(index))
+	{
+		p->setValue(newValue);
+		p->setNeedsUIUpdate(true);
+	}
 }
 
 float AudioProcessor::getParameterDefaultValue (int index)

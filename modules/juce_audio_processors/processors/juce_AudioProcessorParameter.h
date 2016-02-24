@@ -75,7 +75,7 @@ public:
         the beginChangeGesture() and endChangeGesture() methods to tell the host when
         the user has started and stopped changing the parameter.
     */
-    void setValueNotifyingHost (float newValue);
+    virtual void setValueNotifyingHost (float newValue);
 
     /** Sends a signal to the host to tell it that the user is about to start changing this
         parameter.
@@ -146,10 +146,17 @@ public:
     /** Returns the index of this parameter in its parent processor's parameter list. */
     int getParameterIndex() const noexcept              { return parameterIndex; }
 
+	void setNeedsUIUpdate(bool needsUpdate) noexcept { UIUpdate = needsUpdate; }
+	bool getNeedsUIUpdate() const noexcept { return UIUpdate; }
+	bool needsUIUpdate() const noexcept { return UIUpdate; }
+
+protected:
+		AudioProcessor* processor;
+
 private:
-    friend class AudioProcessor;
-    AudioProcessor* processor;
+    friend class AudioProcessor;    
     int parameterIndex;
+	bool UIUpdate;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioProcessorParameter)
 };

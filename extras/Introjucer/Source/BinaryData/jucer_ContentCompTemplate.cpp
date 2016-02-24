@@ -1,10 +1,16 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-  ==============================================================================
-*/
+/*==============================================================================
+//  FILENAME
+//  Part of the Zentropia JUCE Collection
+//  @author Casey Bailey (<a href="SonicZentropy@gmail.com">email</a>)
+//  @version 0.1
+//  @date DATE
+//  Copyright (C) 2016 by Casey Bailey
+//  Provided under the [GNU license]
+//
+//  Details: Generic Content Component Class
+//
+//  Zentropia is hosted on Github at [https://github.com/SonicZentropy]
+===============================================================================*/
 
 INCLUDE_CORRESPONDING_HEADER
 
@@ -22,10 +28,6 @@ CONTENTCOMPCLASS::~CONTENTCOMPCLASS()
 void CONTENTCOMPCLASS::paint (Graphics& g)
 {
     g.fillAll (Colour (0xff001F36));
-
-    g.setFont (Font (16.0f));
-    g.setColour (Colours::white);
-    g.drawText ("Hello World!", getLocalBounds(), Justification::centred, true);
 }
 
 void CONTENTCOMPCLASS::resized()

@@ -106,6 +106,7 @@ struct NewProjectWizard
             "juce_gui_basics",
             "juce_gui_extra",
             "juce_cryptography",
+            "juce_cryptography",
             "juce_video",
             "juce_opengl",
             "juce_audio_basics",

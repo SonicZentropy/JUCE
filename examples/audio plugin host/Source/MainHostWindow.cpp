@@ -57,6 +57,7 @@ public:
         getAppProperties().getUserSettings()->setValue ("listWindowPos", getWindowStateAsString());
 
         clearContentComponent();
+
     }
 
     void closeButtonPressed()
@@ -162,7 +163,7 @@ void MainHostWindow::changeListenerCallback (ChangeBroadcaster* changed)
     {
         menuItemsChanged();
 
-        // save the plugin list every time it gets chnaged, so that if we're scanning
+        // save the plugin list every time it gets changed, so that if we're scanning
         // and it crashes, we've still saved the previous ones
         ScopedPointer<XmlElement> savedPluginList (knownPluginList.createXml());
 

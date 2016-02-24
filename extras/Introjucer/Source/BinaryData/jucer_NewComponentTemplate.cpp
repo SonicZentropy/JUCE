@@ -1,12 +1,16 @@
-/*
-  ==============================================================================
-
-    FILENAME
-    Created: DATE
-    Author:  AUTHOR
-
-  ==============================================================================
-*/
+/*==============================================================================
+//  FILENAME
+//  Part of the Zentropia JUCE Collection
+//  @author Casey Bailey (<a href="SonicZentropy@gmail.com">email</a>)
+//  @version 0.1
+//  @date DATE
+//  Copyright (C) 2016 by Casey Bailey
+//  Provided under the [GNU license]
+//
+//  Details: Generic Component Class
+//
+//  Zentropia is hosted on Github at [https://github.com/SonicZentropy]
+===============================================================================*/
 
 INCLUDE_JUCE
 INCLUDE_CORRESPONDING_HEADER

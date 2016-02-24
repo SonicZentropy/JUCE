@@ -31,7 +31,7 @@ namespace BinaryData
     const int            portmeirion_jpgSize = 145904;
 
     extern const char*   teapot_obj;
-    const int            teapot_objSize = 95000;
+    const int            teapot_objSize = 97866;
 
     extern const char*   treedemo_xml;
     const int            treedemo_xmlSize = 1126;

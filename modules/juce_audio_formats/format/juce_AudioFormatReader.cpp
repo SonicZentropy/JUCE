@@ -21,7 +21,7 @@
 
   ==============================================================================
 */
-
+#pragma warning(disable:4100)
 AudioFormatReader::AudioFormatReader (InputStream* const in, const String& name)
     : sampleRate (0),
       bitsPerSample (0),
@@ -100,6 +100,7 @@ bool AudioFormatReader::read (int* const* destSamples,
 
     return true;
 }
+
 
 static void readChannels (AudioFormatReader& reader,
                           int** const chans, AudioSampleBuffer* const buffer,

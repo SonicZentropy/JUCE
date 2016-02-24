@@ -49,3 +49,10 @@ profile
 **/CodeBlocks/*.layout
 **/Builds/AndroidStudio
 doxygen/doc
+
+*.lnk
+*.exe
+[bB]uild*
+*.dll
+*.vst3
+13.ico
