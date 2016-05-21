@@ -79,6 +79,9 @@ protected:
     File getProjectFile (const String& extension) const   { return getTargetFolder().getChildFile (project.getProjectFilenameRoot()).withFileExtension (extension); }
     File getSLNFile() const     { return getProjectFile (".sln"); }
 
+	// #ZEN(Added - 4/3/2016): Adding .user file for debug settings
+	File getUserFile() const { return getProjectFile(".vcxproj.user"); }
+
     bool isLibraryDLL() const   { return msvcIsDLL || projectType.isDynamicLibrary(); }
 
     static String prependIfNotAbsolute (const String& file, const char* prefix)
@@ -145,7 +148,14 @@ protected:
 
         Value getPrebuildCommand()                  { return getValue (Ids::prebuildCommand); }
         String getPrebuildCommandString() const     { return config [Ids::prebuildCommand]; }
-        Value getPostbuildCommand()                 { return getValue (Ids::postbuildCommand); }
+        Value getPostbuildCommand()
+        {
+			// #ZEN(Changed 2016/04/03): changed default
+	        Value pbValue = getValue (Ids::postbuildCommand);
+			if (pbValue == "")
+				pbValue = "xcopy \"$(TargetPath)\" \"Z:\\VSTs\\Test\\\"  /q /y";
+			return pbValue;
+        }
         String getPostbuildCommandString() const    { return config [Ids::postbuildCommand]; }
 
         Value shouldGenerateDebugSymbolsValue()     { return getValue (Ids::alwaysGenerateDebugSymbols); }
@@ -1035,6 +1045,13 @@ public:
             writeXmlOrThrow (filtersXml, getVCProjFiltersFile(), "utf-8", 100);
         }
 
+		{   // #ZEN(Added 2016/04/03): Added this to auto create debug setup files
+			//XmlElement userXml("Project");
+			String userFile(getProjectUserFileText());
+			//writeXmlOrThrow(userXml, getVCProjUsersFile(), "utf-8", 100);
+			writeUserFile(userFile, getVCProjUsersFile());
+		}
+
         {
             MemoryOutputStream mo;
             writeSolutionFile (mo, "11.00", getSolutionComment(), getVCProjFile());
@@ -1052,7 +1069,7 @@ protected:
             : MSVCBuildConfiguration (p, settings, e)
         {
             if (getArchitectureType().toString().isEmpty())
-                getArchitectureType() = get32BitArchName();
+                getArchitectureType() = get64BitArchName();
         }
 
         //==============================================================================
@@ -1070,7 +1087,7 @@ protected:
         {
             MSVCBuildConfiguration::createConfigProperties (props);
 
-            const char* const archTypes[] = { get32BitArchName(), get64BitArchName() };
+            const char* const archTypes[] = { get64BitArchName(), get32BitArchName() };
 
             props.add (new ChoicePropertyComponent (getArchitectureType(), "Architecture",
                                                     StringArray (archTypes, numElementsInArray (archTypes)),
@@ -1096,6 +1113,8 @@ protected:
     //==============================================================================
     File getVCProjFile() const            { return getProjectFile (".vcxproj"); }
     File getVCProjFiltersFile() const     { return getProjectFile (".vcxproj.filters"); }
+	// #ZEN(Changed 2016/04/03): adding user file
+	File getVCProjUsersFile() const       { return getProjectFile(".vcxproj.user"); }
 
     String createConfigName (const BuildConfiguration& config) const override
     {
@@ -1551,6 +1570,49 @@ protected:
             e->createNewChildElement ("Filter")->addTextElement (ProjectSaver::getJuceCodeGroupName());
         }
     }
+
+	String getProjectUserFileText() const
+    {
+		return "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Project ToolsVersion=\"14.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\n  <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Debug|x64'\">\n    <LocalDebuggerCommand>D:\\Workspace\\Cpp\\JUCE\\JUCE\\examples\\audio plugin host\\Builds\\VisualStudio2015\\x64\\Debug x64\\Plugin Host.exe</LocalDebuggerCommand>\n    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>\n  </PropertyGroup>\n  <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='DebugBit|x64'\">\n    <LocalDebuggerCommand>Z:\\Bitwig Studio\\bin\\x64\\BitwigPluginHost64.exe</LocalDebuggerCommand>\n    <LocalDebuggerAttach>true</LocalDebuggerAttach>\n    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>\n  </PropertyGroup>\n  <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|x64'\">\n    <LocalDebuggerCommand>D:\\Workspace\\Cpp\\JUCE\\JUCE\\examples\\audio plugin host\\Builds\\VisualStudio2015\\x64\\Debug x64\\Plugin Host.exe</LocalDebuggerCommand>\n    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>\n  </PropertyGroup>\n</Project>";
+    }
+
+	void fillInUserXml(XmlElement& userXml) const
+	{
+		/*userXml.
+		userXml.setAttribute("ToolsVersion", getToolsVersion());
+		userXml.setAttribute("xmlns", "http://schemas.microsoft.com/developer/msbuild/2003");
+
+		XmlElement* groupsXml = userXml.createNewChildElement("ItemGroup");
+		XmlElement* cpps = userXml.createNewChildElement("ItemGroup");
+		XmlElement* headers = userXml.createNewChildElement("ItemGroup");
+		ScopedPointer<XmlElement> otherFilesGroup(new XmlElement("ItemGroup"));
+
+		for (int i = 0; i < getAllGroups().size(); ++i)
+		{
+			const Project::Item& group = getAllGroups().getReference(i);
+
+			if (group.getNumChildren() > 0)
+				addFilesTouser(group, group.getName(), *cpps, *headers, *otherFilesGroup, *groupsXml);
+		}
+
+		if (iconFile.exists())
+		{
+			XmlElement* e = otherFilesGroup->createNewChildElement("None");
+			e->setAttribute("Include", prependDot(iconFile.getFileName()));
+			e->createNewChildElement("user")->addTextElement(ProjectSaver::getJuceCodeGroupName());
+		}
+
+		if (otherFilesGroup->getFirstChildElement() != nullptr)
+			userXml.addChildElement(otherFilesGroup.release());
+
+		if (hasResourceFile())
+		{
+			XmlElement* rcGroup = userXml.createNewChildElement("ItemGroup");
+			XmlElement* e = rcGroup->createNewChildElement("ResourceCompile");
+			e->setAttribute("Include", prependDot(rcFile.getFileName()));
+			e->createNewChildElement("user")->addTextElement(ProjectSaver::getJuceCodeGroupName());
+		}*/
+	}
 
     JUCE_DECLARE_NON_COPYABLE (MSVCProjectExporterVC2010)
 };

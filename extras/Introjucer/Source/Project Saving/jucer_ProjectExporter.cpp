@@ -107,7 +107,8 @@ String ProjectExporter::getCurrentPlatformExporterName()
    #if JUCE_MAC
     return XCodeProjectExporter::getNameMac();
    #elif JUCE_WINDOWS
-    return MSVCProjectExporterVC2010::getName();
+    //return MSVCProjectExporterVC2010::getName();
+	return MSVCProjectExporterVC2015::getName();
    #elif JUCE_LINUX
     return MakefileProjectExporter::getNameLinux();
    #else
@@ -527,14 +528,31 @@ void ProjectExporter::createDefaultConfigs()
 {
     settings.getOrCreateChildWithName (Ids::CONFIGURATIONS, nullptr);
 
-    for (int i = 0; i < 2; ++i)
+    for (int i = 0; i < 3; ++i)
     {
         addNewConfiguration (nullptr);
         BuildConfiguration::Ptr config (getConfiguration (i));
 
-        const bool debugConfig = i == 0;
+        const bool debugConfig = i < 2;
 
-        config->getNameValue() = debugConfig ? "Debug" : "Release";
+        //config->getNameValue() = debugConfig ? "Debug" : "Release";
+
+		switch(i)
+		{
+			case 0:
+				config->getNameValue() = "Debug";
+				break;
+			case 1:
+				config->getNameValue() = "DebugBit";
+				break;
+			case 2:
+				config->getNameValue() = "Release";
+				break;
+			default:
+				config->getNameValue() = "Debug";
+				break;
+		}
+
         config->isDebugValue() = debugConfig;
         config->getOptimisationLevel() = config->getDefaultOptimisationLevel();
         config->getTargetBinaryName() = project.getProjectFilenameRoot();

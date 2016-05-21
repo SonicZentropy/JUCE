@@ -104,15 +104,14 @@ struct NewProjectWizard
             "juce_graphics",
             "juce_data_structures",
             "juce_gui_basics",
-            "juce_gui_extra",
-            "juce_cryptography",
-            "juce_cryptography",
-            "juce_video",
+            "juce_gui_extra",        
+            "juce_audio_utils",
             "juce_opengl",
             "juce_audio_basics",
             "juce_audio_devices",
             "juce_audio_formats",
             "juce_audio_processors",
+			"zen_utils",
             nullptr
         };
 

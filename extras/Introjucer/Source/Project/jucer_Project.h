@@ -85,22 +85,68 @@ public:
     int getVersionAsHexInteger() const;
 
     Value getBundleIdentifier()                         { return getProjectValue (Ids::bundleIdentifier); }
-    String getDefaultBundleIdentifier()                 { return "com.yourcompany." + CodeHelpers::makeValidIdentifier (getTitle(), false, true, false); }
+    String getDefaultBundleIdentifier()                 { return "com.soniczentropy." + CodeHelpers::makeValidIdentifier (getTitle(), false, true, false); }
 
     Value getAAXIdentifier()                            { return getProjectValue (Ids::aaxIdentifier); }
     String getDefaultAAXIdentifier()                    { return getDefaultBundleIdentifier(); }
 
-    Value getCompanyName()                              { return getProjectValue (Ids::companyName); }
-    Value getCompanyWebsite()                           { return getProjectValue (Ids::companyWebsite); }
-    Value getCompanyEmail()                             { return getProjectValue (Ids::companyEmail); }
+	// #ZEN(Changed 2016/04/02): set defaults
+    Value getCompanyName()
+    {
+	    Value nameVal = getProjectValue (Ids::companyName);
+		if (nameVal.getValue() == "")
+		{
+			nameVal.setValue("Sonic Zentropy");
+		}
+		return nameVal;
+    }
+
+    Value getCompanyWebsite()
+    {
+	    Value webVal = getProjectValue (Ids::companyWebsite);
+		if (webVal.getValue() == "")
+		{
+			webVal.setValue("https://www.soniczentropy.com");
+		}
+		return webVal;
+    }
+    Value getCompanyEmail()
+    {
+		Value emailVal = getProjectValue(Ids::companyEmail);
+		if (emailVal.getValue() == "")
+		{
+			emailVal.setValue("zen@soniczentropy.com");
+		}
+		return emailVal;
+    }
 
     //==============================================================================
     Value getProjectValue (const Identifier& name)      { return projectRoot.getPropertyAsValue (name, getUndoManagerFor (projectRoot)); }
 
-    Value getProjectPreprocessorDefs()                  { return getProjectValue (Ids::defines); }
+	// #ZEN(Changed 2016/04/02): added defaults
+    Value getProjectPreprocessorDefs()
+    {
+	    Value defs = getProjectValue (Ids::defines);
+		if (defs == "")
+		{
+			defs.setValue("ZEN_DEBUG");
+		}
+		return defs;
+    }
     StringPairArray getPreprocessorDefs() const;
 
-    Value getProjectUserNotes()                         { return getProjectValue (Ids::userNotes); }
+    Value getProjectUserNotes()
+    {
+	    // #ZEN(Changed - 4/2/2016): changed from default
+	    Value notesVal = getProjectValue (Ids::userNotes);
+		if (notesVal == "")
+		{
+			String notes = "Debug-D:\\Workspace\\Cpp\\JUCE\\JUCE\\examples\\audio plugin host\\Builds\\VisualStudio2015\\x64\\Debug x64\\Plugin Host.exe\n DebugBitwig - Z:\\Bitwig Studio\\bin\\x64\\BitwigPluginHost64.exe \nRelease - D:\\Workspace\\Cpp\\JUCE\\JUCE\\examples\\audio plugin host\\Builds\\VisualStudio2015\\x64\\Debug x64\\Plugin Host.exe";
+				
+			notesVal.setValue(notes);
+		}
+		return notesVal;
+    }
 
     //==============================================================================
     File getGeneratedCodeFolder() const                         { return getFile().getSiblingFile ("JuceLibraryCode"); }

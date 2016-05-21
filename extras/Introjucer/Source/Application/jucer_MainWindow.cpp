@@ -73,6 +73,7 @@ MainWindow::MainWindow()
     getLookAndFeel().setColour (ColourSelector::backgroundColourId, Colours::transparentBlack);
 
     setResizeLimits (600, 500, 32000, 32000);
+	ZEN_COMPONENT_DEBUG_ATTACH(this);
 }
 
 MainWindow::~MainWindow()

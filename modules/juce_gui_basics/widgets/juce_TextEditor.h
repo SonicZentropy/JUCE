@@ -556,7 +556,7 @@ public:
 
         String filterNewText (TextEditor&, const String&) override;
 
-    private:
+    protected:
         String allowedCharacters;
         int maxLength;
 
@@ -656,8 +656,9 @@ protected:
     /** Can be overridden to intercept escape key presses directly */
     virtual void escapePressed();
 
-private:
-    //==============================================================================
+	void setTextHolderSize(int inWidth, int inHeight);
+	void setTextHolderBounds(int newX, int newY, int newWidth, int newHeight);
+	//==============================================================================
     class Iterator;
     JUCE_PUBLIC_IN_DLL_BUILD (class UniformTextSection)
     class TextHolderComponent;

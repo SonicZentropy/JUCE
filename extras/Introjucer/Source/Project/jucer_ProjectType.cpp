@@ -199,15 +199,15 @@ public:
         const String sanitisedProjectName (CodeHelpers::makeValidIdentifier (project.getTitle(), false, true, false));
 
         setValueIfVoid (shouldBuildVST (project), true);
-        setValueIfVoid (shouldBuildVST3 (project), false);
-        setValueIfVoid (shouldBuildAU (project),  true);
+        setValueIfVoid (shouldBuildVST3 (project), true);
+        setValueIfVoid (shouldBuildAU (project),  false);
         setValueIfVoid (shouldBuildRTAS (project), false);
         setValueIfVoid (shouldBuildAAX (project), false);
 
         setValueIfVoid (getPluginName (project),                   project.getTitle());
         setValueIfVoid (getPluginDesc (project),                   project.getTitle());
-        setValueIfVoid (getPluginManufacturer (project),           "yourcompany");
-        setValueIfVoid (getPluginManufacturerCode (project),       "Manu");
+        setValueIfVoid (getPluginManufacturer (project),           "SonicZentropy");
+        setValueIfVoid (getPluginManufacturerCode (project),       "ZENT");
         setValueIfVoid (getPluginCode (project),                   makeValid4CC (project.getProjectUID() + project.getProjectUID()));
         setValueIfVoid (getPluginChannelConfigs (project),         "");
         setValueIfVoid (getPluginIsSynth (project),                false);

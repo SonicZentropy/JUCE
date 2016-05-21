@@ -228,7 +228,7 @@ public:
         }
         else
         {
-            s = "com.yourcompany.";
+            s = "com.soniczentropy.";
         }
 
         return s + CodeHelpers::makeValidIdentifier (project.getProjectFilenameRoot(), false, true, false);

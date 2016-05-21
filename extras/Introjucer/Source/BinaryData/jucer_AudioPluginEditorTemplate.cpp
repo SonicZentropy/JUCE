@@ -21,10 +21,13 @@ EDITORCLASSNAME::EDITORCLASSNAME (FILTERCLASSNAME& p)
 {
 
     setSize (400, 300);
+    ZEN_COMPONENT_DEBUG_ATTACH(this);
 }
 
 EDITORCLASSNAME::~EDITORCLASSNAME()
 {
+    
+    ZenDebugEditor::removeComponentDebugger();
 }
 
 //==============================================================================

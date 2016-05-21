@@ -105,7 +105,17 @@ public:
     Value getTargetLocationValue()              { return getSetting (Ids::targetFolder); }
     String getTargetLocationString() const      { return getSettingString (Ids::targetFolder); }
 
-    Value getExtraCompilerFlags()               { return getSetting (Ids::extraCompilerFlags); }
+	// #ZEN(Changed 2016/04/02): changed default
+    Value getExtraCompilerFlags()
+    {
+	    Value flags = getSetting (Ids::extraCompilerFlags);
+		if (flags == "")
+		{
+			String newflags = "/wd4100\n/wd4189\n/wd4244\n/wd4458\n/wd4456\n/wd4302\n/wd4312\n/wd4311\n/wd4244\n/wd4305\n";
+			flags.setValue(newflags);
+		}
+		return flags;
+    }
     String getExtraCompilerFlagsString() const  { return getSettingString (Ids::extraCompilerFlags).replaceCharacters ("\r\n", "  "); }
 
     Value getExtraLinkerFlags()                 { return getSetting (Ids::extraLinkerFlags); }
@@ -218,7 +228,12 @@ public:
         String getTargetBinaryNameString() const            { return config [Ids::targetName]; }
 
         // the path relative to the build folder in which the binary should go
-        Value getTargetBinaryRelativePath()                 { return getValue (Ids::binaryPath); }
+		// #ZEN(Changed 2016/04/02): changed default
+		// #ZEN(Changed 2016/04/03): reverted to default
+        Value getTargetBinaryRelativePath()
+        {
+	        return getValue (Ids::binaryPath);			
+        }
         String getTargetBinaryRelativePathString() const    { return config [Ids::binaryPath]; }
 
         Value getOptimisationLevel()                        { return getValue (Ids::optimisation); }
@@ -387,6 +402,11 @@ protected:
         {
             overwriteFileIfDifferentOrThrow (file, mo);
         }
+    }
+
+	static void writeUserFile(const String fileText, const File& file)
+    {
+		file.replaceWithText(fileText, false, false);
     }
 
     static Image rescaleImageForIcon (Drawable&, int iconSize);

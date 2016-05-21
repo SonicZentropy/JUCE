@@ -30,6 +30,18 @@ public:
     void initialise (const String& commandLine) override
     {
         // This method is where you should put your application's initialisation code..
+#ifdef JUCE_MSVC
+        //Visual Studio mem leak diagnostics settings 
+	    _CrtSetDbgFlag(0);	//Turn off VS memory dump output
+	    //_crtBreakAlloc = 307;	//Break on this memory allocation number (When Debug)
+#endif
+    
+#ifdef JUCE_DEBUG
+	    //Create Zen_Utils Debug window instance
+        debugWindow = ZenDebugEditor::getInstance();
+	    debugWindow->setSize(400, 400);
+	    debugWindow->setTopLeftPosition(1900 - debugWindow->getWidth(), 1040 - debugWindow->getHeight());
+#endif
 
         mainWindow = new MainWindow (getApplicationName());
     }
@@ -39,6 +51,7 @@ public:
         // Add your application's shutdown code here..
 
         mainWindow = nullptr; // (deletes our window)
+        debugWindow = nullptr;
     }
 
     //==============================================================================

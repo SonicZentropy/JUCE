@@ -268,7 +268,7 @@ public:
           fileBrowser (FileBrowserComponent::saveMode
                          | FileBrowserComponent::canSelectDirectories
                          | FileBrowserComponent::doNotClearFileNameOnRootChange,
-                       NewProjectWizardClasses::getLastWizardFolder(), nullptr, nullptr),
+                       getDefaultProjectFolder(), nullptr, nullptr),
           fileOutline (String::empty, TRANS("Project Folder") + ":"),
           targetsOutline (String::empty, TRANS("Target Platforms") + ":"),
           createButton (TRANS("Create") + "..."),
@@ -278,7 +278,7 @@ public:
         setOpaque (false);
 
         addChildAndSetID (&projectName, "projectName");
-        projectName.setText ("NewProject");
+        projectName.setText ("Zen");
         projectName.setBounds ("120, 34, parent.width / 2 - 10, top + 22");
         nameLabel.attachToComponent (&projectName, true);
         projectName.addListener (this);
@@ -324,6 +324,11 @@ public:
 
         updateCustomItems();
         updateCreateButton();
+    }
+
+	File getDefaultProjectFolder()
+    {
+		return File("D:\\Workspace\\Cpp\\JUCE\\");
     }
 
     void paint (Graphics& g) override

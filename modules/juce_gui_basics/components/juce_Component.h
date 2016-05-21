@@ -438,7 +438,7 @@ public:
         bounds will no longer be a direct reflection of the position at which it appears within
         its parent, as the transform will be applied to whatever bounds you set for it.
     */
-    void setSize (int newWidth, int newHeight);
+	virtual void setSize (int newWidth, int newHeight);
 
     /** Changes the component's position and size.
 

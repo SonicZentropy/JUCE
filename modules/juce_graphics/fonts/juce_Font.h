@@ -461,6 +461,7 @@ public:
     */
     static Font fromString (const String& fontDescription);
 
+    float getHeightToPointsFactor() const;
 
 private:
     //==============================================================================
@@ -468,7 +469,6 @@ private:
     ReferenceCountedObjectPtr<SharedFontInternal> font;
     void dupeInternalIfShared();
     void checkTypefaceSuitability();
-    float getHeightToPointsFactor() const;
 
     JUCE_LEAK_DETECTOR (Font)
 };

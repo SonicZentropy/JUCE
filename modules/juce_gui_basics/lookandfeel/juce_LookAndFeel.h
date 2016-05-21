@@ -208,7 +208,8 @@ public:
     /** Plays the system's default 'beep' noise, to alert the user about something very important. */
     virtual void playAlertSound();
 
-private:
+	// #ZEN(Changed 2016/04/04): Changed private to protected
+protected:
     //==============================================================================
     friend class WeakReference<LookAndFeel>;
     WeakReference<LookAndFeel>::Master masterReference;

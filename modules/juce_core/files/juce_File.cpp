@@ -125,7 +125,9 @@ String File::parseAbsolutePath (const String& p)
             "File::getCurrentWorkingDirectory().getChildFile (myUnknownPath)" would return an absolute
             path if that's what was supplied, or would evaluate a partial path relative to the CWD.
         */
-        jassertfalse;
+		// #ZEN(Changed 2016/04/03): Removed jassert, put in DBG call instead due to live constant ed.
+		//jassertfalse;
+		DBG("Passed relative path to juce_File line 130! Jassert Bypassed");
 
         return File::getCurrentWorkingDirectory().getChildFile (path).getFullPathName();
     }

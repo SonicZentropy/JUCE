@@ -535,7 +535,8 @@ public:
             jassert (atom->getTrimmedText (passwordCharacter).isNotEmpty());
 
             GlyphArrangement ga;
-            ga.addLineOfText (currentSection->font,
+            			
+			ga.addLineOfText (currentSection->font,
                               atom->getTrimmedText (passwordCharacter),
                               atomX, (float) roundToInt (lineY + lineHeight - maxDescent));
             ga.draw (g);
@@ -1256,7 +1257,17 @@ void TextEditor::textChanged()
 void TextEditor::returnPressed()    { postCommandMessage (TextEditorDefs::returnKeyMessageId); }
 void TextEditor::escapePressed()    { postCommandMessage (TextEditorDefs::escapeKeyMessageId); }
 
-void TextEditor::addListener (TextEditorListener* const l)      { listeners.add (l); }
+void TextEditor::setTextHolderSize(int inWidth, int inHeight)
+{
+	textHolder->setSize(inWidth, inHeight);
+}
+
+void TextEditor::setTextHolderBounds(int newX, int newY, int newWidth, int newHeight)
+{
+	textHolder->setBounds(newX, newY, newWidth, newHeight);
+}
+
+void TextEditor::addListener(TextEditorListener* const l) { listeners.add(l); }
 void TextEditor::removeListener (TextEditorListener* const l)   { listeners.remove (l); }
 
 //==============================================================================
@@ -1585,6 +1596,7 @@ void TextEditor::cut()
 //==============================================================================
 void TextEditor::drawContent (Graphics& g)
 {
+	
     const float wordWrapWidth = getWordWrapWidth();
 
     if (wordWrapWidth > 0)

@@ -25,7 +25,6 @@
 #ifndef JUCE_SLIDER_H_INCLUDED
 #define JUCE_SLIDER_H_INCLUDED
 
-
 //==============================================================================
 /**
     A slider control for changing a value.
@@ -50,6 +49,7 @@
 class JUCE_API  Slider  : public Component,
                           public SettableTooltipClient
 {
+	class Pimpl;
 public:
     //==============================================================================
     /** The types of slider available.
@@ -85,12 +85,14 @@ public:
                                              @see setMinValue, setMaxValue */
     };
 
+	// #ZEN(Added 2016/05/09): added TextBoxCentered
     /** The position of the slider's text-entry box.
         @see setTextBoxStyle
     */
     enum TextEntryBoxPosition
     {
         NoTextBox,              /**< Doesn't display a text box.  */
+		TextBoxCentered,
         TextBoxLeft,            /**< Puts the text box to the left of the slider, vertically centred.  */
         TextBoxRight,           /**< Puts the text box to the right of the slider, vertically centred.  */
         TextBoxAbove,           /**< Puts the text box above the slider, horizontally centred.  */
@@ -120,11 +122,16 @@ public:
 
     /** Creates a slider with some explicit options. */
     Slider (SliderStyle style, TextEntryBoxPosition textBoxPosition);
-
-    /** Destructor. */
+	Slider (const String& name, SliderStyle style, TextEntryBoxPosition textBoxPos);
+	/** Destructor. */
     ~Slider();
 
-    //==============================================================================
+	Slider::Pimpl* getPimpl();
+	double getLastCurrentValue() const;
+	Rectangle<int> getSliderRect();
+	void setValueBox(Label* inValueBox);
+	Label* getValueBox();
+	//==============================================================================
     /** Changes the type of slider interface being used.
 
         @param newStyle         the type of interface
@@ -755,9 +762,9 @@ public:
         @returns                the value to use instead
     */
     virtual double snapValue (double attemptedValue, DragMode dragMode);
+	void setNumDecimalPlacesToDisplay(int inNumDP);
 
-
-    //==============================================================================
+	//==============================================================================
     /** This can be called to force the text box to update its contents.
         (Not normally needed, as this is done automatically).
     */
@@ -892,12 +899,17 @@ public:
     /** @internal */
     void colourChanged() override;
 
-private:
+// #ZEN(Changed 2016/04/21): changed to protected	
+protected:
     //==============================================================================
     JUCE_PUBLIC_IN_DLL_BUILD (class Pimpl)
     friend class Pimpl;
     friend struct ContainerDeletePolicy<Pimpl>;
     ScopedPointer<Pimpl> pimpl;
+
+	// #ZEN(Added 2016/05/09): added this method
+	void setPimpl(Pimpl* inPimpl);  // SetpAImpl(AImpl* pImpl) {pAImpl = pImpl;};
+ 	
 
     void init (SliderStyle, TextEntryBoxPosition);
 

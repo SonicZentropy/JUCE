@@ -8,7 +8,9 @@
               pluginWantsMidiIn="0" pluginProducesMidiOut="0" pluginSilenceInIsSilenceOut="0"
               pluginTailLength="0" pluginEditorRequiresKeys="0" pluginAUExportPrefix="BinaryBuilderAU"
               pluginAUViewClass="BinaryBuilderAU_V1" pluginRTASCategory=""
-              bundleIdentifier="com.rawmaterialsoftware.binarybuilder" includeBinaryInAppConfig="1">
+              bundleIdentifier="com.rawmaterialsoftware.binarybuilder" includeBinaryInAppConfig="1"
+              companyName="Sonic Zentropy" companyWebsite="https://www.soniczentropy.com"
+              companyEmail="zen@soniczentropy.com" defines="ZEN_DEBUG" userNotes="Debug-D:\Workspace\Cpp\JUCE\JUCE\examples\audio plugin host\Builds\VisualStudio2015\x64\Debug x64\Plugin Host.exe&#10; DebugBitwig - Z:\Bitwig Studio\bin\x64\BitwigPluginHost64.exe &#10;Release - D:\Workspace\Cpp\JUCE\JUCE\examples\audio plugin host\Builds\VisualStudio2015\x64\Debug x64\Plugin Host.exe">
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="~/SDKs/vstsdk2.4" rtasFolder="~/SDKs/PT_80_SDK"
                objCExtraSuffix="OeJtJb">
@@ -44,6 +46,19 @@
         <MODULEPATH id="juce_core" path="../../modules"/>
       </MODULEPATHS>
     </VS2010>
+    <VS2015 targetFolder="Builds/VisualStudio2015">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       isDebug="1" optimisation="1" targetName="BinaryBuilder"/>
+        <CONFIGURATION name="DebugBit" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       isDebug="1" optimisation="1" targetName="BinaryBuilder"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       isDebug="0" optimisation="3" targetName="BinaryBuilder"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../modules"/>
+      </MODULEPATHS>
+    </VS2015>
   </EXPORTFORMATS>
   <MAINGROUP id="TTBP5JihO" name="BinaryBuilder">
     <GROUP id="noYkBuTg" name="Source">

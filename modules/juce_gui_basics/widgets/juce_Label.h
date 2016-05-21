@@ -239,7 +239,8 @@ public:
     /** Makes the editor appear as if the label had been clicked by the user.
         @see textWasEdited, setEditable
     */
-    void showEditor();
+	// #ZEN(Changed 2016/04/21): added virtual
+    virtual void showEditor();
 
     /** Hides the editor if it was being shown.
 
@@ -294,7 +295,7 @@ protected:
     /** @internal */
     void resized() override;
     /** @internal */
-    void mouseUp (const MouseEvent&) override;
+    virtual void mouseUp (const MouseEvent&) override;
     /** @internal */
     void mouseDoubleClick (const MouseEvent&) override;
     /** @internal */
@@ -326,7 +327,8 @@ protected:
     /** @internal */
     void callChangeListeners();
 
-private:
+	// #ZEN(Changed 2016/04/21): changed to protected
+protected:
     //==============================================================================
     Value textValue;
     String lastTextValue;

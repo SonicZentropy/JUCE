@@ -414,7 +414,8 @@ public:
     JUCE_DEPRECATED (void setSelectedItemIndex (int, bool));
     JUCE_DEPRECATED (void setText (const String&, bool));
 
-private:
+// #ZEN(Changed 2016/05/19): Changed from private to protected
+protected:
     //==============================================================================
     struct ItemInfo
     {

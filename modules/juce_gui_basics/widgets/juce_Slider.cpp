@@ -322,6 +322,8 @@ public:
         return valueMax.getValue();
     }
 
+	double getLastCurrentValue() const { return lastCurrentValue; }
+
     void triggerChangeMessage (const NotificationType notification)
     {
         if (notification != dontSendNotification)
@@ -504,7 +506,7 @@ public:
             editableText = ! isReadOnly;
             textBoxWidth = textEntryBoxWidth;
             textBoxHeight = textEntryBoxHeight;
-
+			
             owner.repaint();
             owner.lookAndFeelChanged();
         }
@@ -1290,7 +1292,17 @@ Slider::Slider (SliderStyle style, TextEntryBoxPosition textBoxPos)
     init (style, textBoxPos);
 }
 
-void Slider::init (SliderStyle style, TextEntryBoxPosition textBoxPos)
+Slider::Slider(const String& name, SliderStyle style, TextEntryBoxPosition textBoxPos) : Component (name)
+{
+	init(style, textBoxPos);
+}
+
+void Slider::setPimpl(Pimpl* inPimpl)
+{
+	pimpl = inPimpl;
+}
+
+void Slider::init(SliderStyle style, TextEntryBoxPosition textBoxPos)
 {
     setWantsKeyboardFocus (false);
     setRepaintsOnMouseActivity (true);
@@ -1304,6 +1316,32 @@ void Slider::init (SliderStyle style, TextEntryBoxPosition textBoxPos)
 }
 
 Slider::~Slider() {}
+
+Slider::Pimpl* Slider::getPimpl()
+{	
+	return pimpl;
+}
+
+double Slider::getLastCurrentValue() const
+{
+	return pimpl->getLastCurrentValue();
+}
+
+Rectangle<int> Slider::getSliderRect()
+{
+	return pimpl->sliderRect;
+}
+
+void Slider::setValueBox(Label* inValueBox)
+{
+	pimpl->valueBox = nullptr;
+	pimpl->valueBox = inValueBox;
+}
+
+Label* Slider::getValueBox()
+{
+	return pimpl->valueBox;
+}
 
 //==============================================================================
 void Slider::addListener (SliderListener* const listener)       { pimpl->listeners.add (listener); }
@@ -1514,6 +1552,8 @@ double Slider::snapValue (double attemptedValue, DragMode)
     return attemptedValue;
 }
 
+void Slider::setNumDecimalPlacesToDisplay(int inNumDP) { pimpl->numDecimalPlaces = inNumDP; }
+
 int Slider::getNumDecimalPlacesToDisplay() const noexcept    { return pimpl->numDecimalPlaces; }
 
 //==============================================================================
@@ -1541,7 +1581,10 @@ void Slider::resized()                  { pimpl->resized (getLookAndFeel()); }
 void Slider::focusOfChildComponentChanged (FocusChangeType)     { repaint(); }
 
 void Slider::mouseDown (const MouseEvent& e)    { pimpl->mouseDown (e); }
-void Slider::mouseUp (const MouseEvent&)        { pimpl->mouseUp(); }
+void Slider::mouseUp (const MouseEvent&)
+{
+	pimpl->mouseUp();
+}
 
 void Slider::modifierKeysChanged (const ModifierKeys& modifiers)
 {

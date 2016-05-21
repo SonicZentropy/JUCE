@@ -53,7 +53,12 @@ public:
     const String getProgramName (int index) override;
     void changeProgramName (int index, const String& newName) override;
 
+    float getSampleRate() const { return sampleRate; }
+	void setSampleRate(float inValue) { sampleRate = inValue; }
+    
 private:
+    ScopedPointer<ZenDebugEditor> debugWindow;
+    float sampleRate = 44100.0f;	
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FILTERCLASSNAME)
 };

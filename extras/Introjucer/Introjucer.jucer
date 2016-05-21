@@ -30,6 +30,12 @@
         <MODULEPATH id="juce_data_structures" path="../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../modules"/>
         <MODULEPATH id="juce_core" path="../../modules"/>
+        <MODULEPATH id="zen_debug" path="../../modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <LINUX_MAKE targetFolder="Builds/Linux" vstFolder="~/SDKs/vstsdk2.4" bigIcon="rVgowdy"
@@ -48,6 +54,12 @@
         <MODULEPATH id="juce_data_structures" path="../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../modules"/>
         <MODULEPATH id="juce_core" path="../../modules"/>
+        <MODULEPATH id="zen_debug" path="../../modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
     <VS2010 targetFolder="Builds/VisualStudio2010" vstFolder="c:\SDKs\vstsdk2.4"
@@ -66,6 +78,12 @@
         <MODULEPATH id="juce_data_structures" path="../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../modules"/>
         <MODULEPATH id="juce_core" path="../../modules"/>
+        <MODULEPATH id="zen_debug" path="../../modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
       </MODULEPATHS>
     </VS2010>
     <VS2012 targetFolder="Builds/VisualStudio2012" bigIcon="rVgowdy">
@@ -83,6 +101,12 @@
         <MODULEPATH id="juce_data_structures" path="../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../modules"/>
         <MODULEPATH id="juce_core" path="../../modules"/>
+        <MODULEPATH id="zen_debug" path="../../modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
       </MODULEPATHS>
     </VS2012>
     <VS2013 targetFolder="Builds/VisualStudio2013" bigIcon="rVgowdy">
@@ -100,6 +124,12 @@
         <MODULEPATH id="juce_data_structures" path="../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../modules"/>
         <MODULEPATH id="juce_core" path="../../modules"/>
+        <MODULEPATH id="zen_debug" path="../../modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
       </MODULEPATHS>
     </VS2013>
     <VS2015 targetFolder="Builds/VisualStudio2015" bigIcon="rVgowdy">
@@ -117,6 +147,12 @@
         <MODULEPATH id="juce_data_structures" path="../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../modules"/>
         <MODULEPATH id="juce_core" path="../../modules"/>
+        <MODULEPATH id="zen_debug" path="../../modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
       </MODULEPATHS>
     </VS2015>
     <CODEBLOCKS targetFolder="Builds/CodeBlocks">
@@ -132,6 +168,12 @@
         <MODULEPATH id="juce_data_structures" path="../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../modules"/>
         <MODULEPATH id="juce_core" path="../../modules"/>
+        <MODULEPATH id="zen_debug" path="../../modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
       </MODULEPATHS>
     </CODEBLOCKS>
   </EXPORTFORMATS>
@@ -615,6 +657,11 @@
                JUCE_USE_OGGVORBIS="disabled" JUCE_USE_COREIMAGE_LOADER="disabled"
                JUCE_LOG_ASSERTIONS="enabled" JUCE_USE_CURL="enabled"/>
   <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0"/>
     <MODULE id="juce_core" showAllCode="1"/>
     <MODULE id="juce_cryptography" showAllCode="1"/>
     <MODULE id="juce_data_structures" showAllCode="1"/>
@@ -622,6 +669,7 @@
     <MODULE id="juce_graphics" showAllCode="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1"/>
+    <MODULE id="zen_debug" showAllCode="1" useLocalCopy="0"/>
   </MODULES>
   <LIVE_SETTINGS>
     <OSX enableCxx11="1" systemHeaderPath="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/4.2/include"/>
